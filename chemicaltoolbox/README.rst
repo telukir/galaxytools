@@ -189,12 +189,12 @@ Galaxy installation
 
 4. Create configuration file::
 
-	cp ~/galaxy-dist/universe_wsgi.ini.sample ~/galaxy-dist/universe_wsgi.ini
+	cp ~/galaxy-dist/config/galaxy.ini.sample ~/galaxy-dist/config/galaxy.ini
 
 5. Open universe_wsgi.ini and change the dependencies directory::
 
-	LINUX: gedit ~/galaxy-dist/universe_wsgi.ini
-	OS X: open -a TextEdit ~/galaxy-dist/universe_wsgi.ini
+	LINUX: gedit ~/galaxy-dist/config/galaxy.ini
+	OS X: open -a TextEdit ~/galaxy-dist/config/galaxy.ini
 
 6. Search for ``tool_dependency_dir = None`` and change it to ``tool_dependency_dir = ./tool_deps``, remove the ``#`` if needed
 
@@ -204,7 +204,7 @@ Galaxy installation
 
 	sh run.sh --reload
 	
-   In deamon mode all logs will be written to main.log in your Galaxy Home directory. You can also use::
+   In deamon mode all logs will be written to main.log in your Galaxy Home directory. You can also use:
    
 	run.sh   
 
@@ -221,7 +221,7 @@ Tool Shed configuration
 
 - Register a new user account in your Galaxy instance: Top Panel → User → Register
 - Become an admin
-	- open ``universe_wsgi.ini`` in your favourite text editor (gedit universe_wsgi.ini)
+	- open ``config/galaxy.ini`` in your favourite text editor (gedit universe_wsgi.ini)
 	- search ``admin_users = None`` and change it to ``admin_users = EMAIL_ADDRESS`` (your Galaxy Username)
 	- remove the ``#`` if needed
 - restart Galaxy
