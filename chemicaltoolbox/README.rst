@@ -25,7 +25,6 @@ ____________________________
 
 
 .. _Learn Galaxy: http://wiki.galaxyproject.org/Learn
-.. _What's the ChemicalToolBoX?
 
 What's the ChemicalToolBoX?
 ===========================
@@ -191,16 +190,35 @@ Galaxy installation
 
 	cp ~/galaxy-dist/config/galaxy.ini.sample ~/galaxy-dist/config/galaxy.ini
 
-5. Open universe_wsgi.ini and change the dependencies directory::
+5. Create the tools configuration file::
+
+	cp config/tool_conf.xml.main config/tool_conf.xml
+
+6. Open config/galaxy.ini and change the dependencies directory::
 
 	LINUX: gedit ~/galaxy-dist/config/galaxy.ini
 	OS X: open -a TextEdit ~/galaxy-dist/config/galaxy.ini
 
-6. Search for ``tool_dependency_dir = None`` and change it to ``tool_dependency_dir = ./tool_deps``, remove the ``#`` if needed
+7. Search for ``tool_dependency_dir = None`` and change it to ``tool_dependency_dir = ./tool_deps``, remove the ``#`` if needed
 
-7. Remove the ``#`` in front of ``tool_config_file`` and ``tool_path``
+8. Remove the ``#`` in front of ``tool_config_file`` and ``tool_path``
 
-8. (Re-)Start the galaxy daemon::
+9. Remove comments to the following lines of config/galaxy.ini::
+
+	visualization_plugins_directory = config/plugins/visualizations
+
+	static_enabled = True
+	static_cache_time = 360
+	static_dir = static/
+	static_images_dir = static/images
+	static_favicon_dir = static/favicon.ico
+	static_scripts_dir = static/scripts/
+	static_style_dir = static/june_2007_style/blue
+	static_robots_txt = static/robots.txt
+
+	serve_xss_vulnerable_mimetypes = False
+
+10. (Re-)Start the galaxy daemon::
 
 	sh run.sh --reload
 	
@@ -221,7 +239,7 @@ Tool Shed configuration
 
 - Register a new user account in your Galaxy instance: Top Panel → User → Register
 - Become an admin
-	- open ``config/galaxy.ini`` in your favourite text editor (gedit universe_wsgi.ini)
+	- open ``config/galaxy.ini`` in your favourite text editor (gedit config/galaxy.ini)
 	- search ``admin_users = None`` and change it to ``admin_users = EMAIL_ADDRESS`` (your Galaxy Username)
 	- remove the ``#`` if needed
 - restart Galaxy
