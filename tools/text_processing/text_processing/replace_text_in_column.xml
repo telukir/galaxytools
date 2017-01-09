@@ -3,9 +3,9 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements">
-        <requirement type="package" version="4.1.0">gnu_awk</requirement>
-    </expand>
+    <requirements>
+        <requirement type="package" version="4.1.3">gawk</requirement>
+    </requirements>
     <version_command>awk --version | head -n 1</version_command>
     <command>
 <![CDATA[
@@ -21,14 +21,14 @@
         <param format="tabular" name="infile" type="data" label="File to process" />
         <param name="column" label="in column" type="data_column" data_ref="infile" accept_default="true" />
 
-        <param name="find_pattern" type="text" size="20" label="Find pattern" help="Use simple text, or a valid regular expression (without backslashes // ) " >
+        <param name="find_pattern" type="text" label="Find pattern" help="Use simple text, or a valid regular expression (without backslashes // ) " >
             <sanitizer>
                 <valid initial="string.printable">
                     <remove value="&apos;"/>
                 </valid>
             </sanitizer>
         </param>
-        <param name="replace_pattern" type="text" size="20" label="Replace with" help="Use simple text, or &amp; (ampersand) and \\1 \\2 \\3 to refer to matched text. See examples below." >
+        <param name="replace_pattern" type="text" label="Replace with" help="Use simple text, or &amp; (ampersand) and \\1 \\2 \\3 to refer to matched text. See examples below." >
             <sanitizer>
                 <valid initial="string.printable">
                     <remove value="&apos;"/>
@@ -132,4 +132,5 @@ The select tool searches the data for lines containing or not containing a match
 @REFERENCES@
 ]]>
     </help>
+    <expand macro="citations" />
 </tool>

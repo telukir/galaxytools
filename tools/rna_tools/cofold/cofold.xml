@@ -1,9 +1,9 @@
-<tool id="cofold" name="Cofold" version="0.0.1">
+<tool id="cofold" name="Cofold" version="2.0.4.0">
     <description>An RNA secondary structure prediction method that takes co-transcriptional folding into account</description>
     <requirements>
-        <requirement type="package" version="0.0.1">cofold</requirement>
+        <requirement type="package" version="2.0.4">cofold</requirement>
     </requirements>
-    <version_command>CoFold --version</version_command>
+    <version_command>echo "2.0.4"</version_command>
     <stdio>
         <exit_code range="1:" />
         <exit_code range=":-1" />
@@ -37,7 +37,7 @@
         <param format="fasta" name="infile" type="data" label="FASTA file"/>
         <param name="distAlpha" type="float" value="0.5" label="temperature [°C]" help="(--distAlpha)"/>
         <param name="distTau" type="float" value="640.0" label="temperature [°C]" help="(--distTau)"/>
-        <param name="temperature" size="6" type="float" value="37.0" label="temperature [°C]" help="(-T)"/>
+        <param name="temperature" type="float" value="37.0" label="temperature [°C]" help="(-T)"/>
         <param name="energy_parameter" type="select" label="Thermodynamic energy parameters" help="(-P)">
             <option value="rna_turner1999.par" selected="True">Turner 1999</option>
             <option value="rna_turner2004.par">Turner 2004</option>
@@ -85,7 +85,7 @@
         <test>
             <param name="infile" value="cofold1.fasta" ftype="fasta"/>
             <param name="noPS" value="--noPS"/>
-            <output name="tabularFile" file="colfold_results1.tabular" ftype="tabular" />
+            <output name="tabularFile" file="cofold_results1.tabular" ftype="tabular" />
         </test>
         <test>
             <param name="infile" value="cofold1.fasta" ftype="fasta"/>
@@ -93,12 +93,12 @@
             <param name="energy_parameter" value="rna_andronescu2007.par"/>
             <param name="dangling" value="1"/>
             <param name="advancedSelector" value="yes"/>
-            <output name="tabularFile" file="colfold_results2.tabular" ftype="tabular" />
+            <output name="tabularFile" file="cofold_results2.tabular" ftype="tabular" />
         </test>
         <test>
             <param name="infile" value="cofold1.fasta" ftype="fasta"/>
             <param name="noPS" value=""/>
-            <output name="tabularFile" file="colfold_results3.tabular" ftype="tabular" />
+            <output name="tabularFile" file="cofold_results3.tabular" ftype="tabular" />
             <output name="report">
                 <assert_contents>
                     <has_line_matching expression="#RNA structures.*" />
@@ -106,22 +106,40 @@
                 <discovered_dataset designation="example1_ss" file="example1_ss.ps" compare="sim_size" delta="100" ftype="rna_eps"/>
             </output>
         </test>
+        <test>
+            <param name="infile" value="cofold1.fasta" ftype="fasta"/>
+            <param name="noPS" value="--noPS"/>
+            <param name="dangling" value="0"/>
+            <output name="tabularFile" file="cofold_results4.tabular" ftype="tabular" />
+        </test>
+        <test>
+            <param name="infile" value="cofold1.fasta" ftype="fasta"/>
+            <param name="noPS" value="--noPS"/>
+            <param name="dangling" value="3"/>
+            <output name="tabularFile" file="cofold_results5.tabular" ftype="tabular" />
+        </test>
+        <test>
+            <param name="infile" value="cofold1.fasta" ftype="fasta"/>
+            <param name="noPS" value="--noPS"/>
+            <param name="energy_parameter" value="rna_turner2004.par"/>
+            <output name="tabularFile" file="cofold_results6.tabular" ftype="tabular" />
+        </test>
     </tests>
     <help>
 <![CDATA[
-**CoFold**
 
-A tool for prediction of RNA secondary structure that takes co-transcriptional folding into account 
+**What it does**
 
-**Input format**
+Cofold predicts RNA secondary structures that takes co-transcriptional folding into account.
+
+**Input**
 
 CoFold requires one input file in FASTA format.
 
-------
 
-**Outputs**
+**Output**
 
-- Tab-seperated file
+- Tab-separated file
     - 1st column: header line of FASTA input
     - 2nd column: sequence
     - 3rd column: dot-bracket notation

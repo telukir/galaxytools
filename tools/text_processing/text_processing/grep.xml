@@ -3,9 +3,10 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements">
-        <requirement type="package" version="2.14">gnu_grep</requirement>
-    </expand>
+    <requirements>
+        <requirement type="package" version="2.14">grep</requirement>
+        <requirement type="package" version="4.2.3.dev0">sed</requirement><!-- for ansi2html.sh -->
+    </requirements>
     <version_command>grep --version | head -n 1</version_command>
     <command>
 <![CDATA[
@@ -13,7 +14,7 @@
             GREP_COLOR='1;34'
             grep
                 --color=always
-                -P
+                $regex_type
                 -A $lines_after
                 -B $lines_before
                 $invert
@@ -22,7 +23,7 @@
                 '${infile}' | $__tool_directory__/ansi2html.sh > "${output}"
         #else:
             grep
-                -P
+                $regex_type
                 -A $lines_after
                 -B $lines_before
                 $invert
@@ -30,8 +31,6 @@
                  -- "${url_paste}"
                 '${infile}' | grep -v "^--$" > "${output}"
         #end if
-
-        ##grep_wrapper.sh '$infile' '$output' '$url_paste' $color -A $lines_after -B $lines_before $invert $case_sensitive
 ]]>
     </command>
     <inputs>
@@ -41,8 +40,14 @@
             <option value="">Match</option>
             <option value="-v">Don't Match</option>
         </param>
-
-        <param name="url_paste" type="text" size="40" label="Regular Expression" help="See below for more details">
+        
+        <param name="regex_type" type="select" label="Type of regex">
+            <option value="-G">Basic</option>
+            <option value="-P" selected="true">Perl</option>
+            <option value="-E">Extended (egrep)</option>
+        </param>
+        
+        <param name="url_paste" type="text" label="Regular Expression" help="See below for more details">
             <sanitizer>
                 <valid initial="string.printable">
                     <remove value="&apos;"/>
@@ -76,6 +81,7 @@
             <!-- grep a FASTA file for sequences with specific motif -->
             <param name="infile" value="grep1.txt" />
             <param name="case_sensitive" value="case sensitive" />
+            <param name="regex_type" value="-P" />
             <param name="invert" value="" />
             <param name="url_paste" value="AA.{2}GT" />
             <param name="lines_before" value="1" />
@@ -88,12 +94,35 @@
              show highlighed output -->
             <param name="infile" value="grep1.txt" />
             <param name="case_sensitive" value="case sensitive" />
+            <param name="regex_type" value="-P" />
             <param name="invert" value="" />
             <param name="url_paste" value="AA.{2}GT" />
             <param name="lines_before" value="0" />
             <param name="lines_after" value="0" />
             <param name="color" value="COLOR" />
             <output name="output" file="grep_results2.html" />
+        </test>
+        <test><!-- tests egrep -->
+            <param name="infile" value="egrep1.txt" />
+            <param name="case_sensitive" value="case sensitive" />
+            <param name="regex_type" value="-E" />
+            <param name="invert" value="" />
+            <param name="url_paste" value="[^ ]+" />
+            <param name="lines_before" value="0" />
+            <param name="lines_after" value="0" />
+            <param name="color" value="NOCOLOR" />
+            <output name="output" file="egrep_results1.txt" />
+        </test>
+        <test><!-- same regex as egrep test, but different outcome with basic regex -->
+            <param name="infile" value="egrep1.txt" />
+            <param name="case_sensitive" value="case sensitive" />
+            <param name="regex_type" value="-G" />
+            <param name="invert" value="" />
+            <param name="url_paste" value="[^ ]+" />
+            <param name="lines_before" value="0" />
+            <param name="lines_after" value="0" />
+            <param name="color" value="NOCOLOR" />
+            <output name="output" file="egrep_results2.txt" />
         </test>
     </tests>
     <help>
@@ -161,4 +190,5 @@ The select tool searches the data for lines containing or not containing a match
 @REFERENCES@
 ]]>
     </help>
+    <expand macro="citations" />
 </tool>

@@ -1,5 +1,8 @@
 <tool id="sed_stream_editor" name="Manipulation" version="0.0.1">
-    <description>of text lines with regular expressions (sed)</description>
+    <description>utility that parses and transforms text using regular expressions (sed)</description>
+    <requirements>
+        <requirement type="package" version="4.2.2">sed</requirement>
+    </requirements>
     <command>
 <![CDATA[
     sed -r '$pattern'
@@ -8,7 +11,7 @@
     </command>
     <inputs>
         <param format="txt, tabular" name="input" type="data" label="Replace lines from"/>
-        <param name="pattern" size="40" type="text" value="" label="the pattern" help="here you can enter your sed expression (No syntax check or sanitising!)" />
+        <param name="pattern" type="text" value="" label="the pattern" help="here you can enter your sed expression (No syntax check or sanitising!)" />
     </inputs>
     <outputs>
         <data format="input" name="outfile" metadata_source="input"/>

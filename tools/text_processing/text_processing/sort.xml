@@ -4,7 +4,7 @@
         <import>macros.xml</import>
     </macros>
     <expand macro="requirements">
-        <requirement type="package" version="4.2.2-sandbox">gnu_sed</requirement>
+        <requirement type="package" version="4.2.3.dev0">sed</requirement>
     </expand>
     <version_command>sort --version | head -n 1</version_command>
     <command>
@@ -26,7 +26,7 @@
     </command>
     <inputs>
         <param format="tabular" name="infile" type="data" label="Sort Query" />
-        <param name="header" type="integer" size="5" value="0"
+        <param name="header" type="integer" value="0"
             label="Number of header lines" help="These will be ignored during sort.">
             <validator type="in_range" message="Negative values are not allowed." min="0"/>
         </param>
@@ -77,7 +77,7 @@
             <repeat name="sortkeys">
                 <param name="column" value="1"/>
                 <param name="style" value=""/>
-            <param name="order" value=""/>
+                <param name="order" value=""/>
             </repeat>
             <repeat name="sortkeys">
                 <param name="column" value="3"/>
@@ -173,4 +173,5 @@ If you're planning to use the file with another tool that expected sorted files 
 @REFERENCES@
 ]]>
   </help>
+  <expand macro="citations" />
 </tool>

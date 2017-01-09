@@ -3,9 +3,9 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements">
-        <requirement type="package" version="4.2.2-sandbox">gnu_sed</requirement>
-    </expand>
+    <requirements>
+        <requirement type="package" version="4.2.3.dev0">sed</requirement>
+    </requirements>
     <version_command>sed --version | head -n 1</version_command>
     <command>
 <![CDATA[
@@ -19,14 +19,14 @@
     </command>
     <inputs>
         <param format="txt" name="infile" type="data" label="File to process" />
-         <param name="find_pattern" type="text" size="20" label="Find pattern" help="Use simple text, or a valid regular expression (without backslashes // ) " >
+         <param name="find_pattern" type="text" label="Find pattern" help="Use simple text, or a valid regular expression (without backslashes // ) " >
             <sanitizer>
                 <valid initial="string.printable">
                     <remove value="&apos;"/>
                 </valid>
             </sanitizer>
         </param>
-         <param name="replace_pattern" type="text" size="20" label="Replace with:" help="Use simple text, or &amp; (ampersand) and \\1 \\2 \\3 to refer to matched text. See examples below." >
+         <param name="replace_pattern" type="text" label="Replace with:" help="Use simple text, or &amp; (ampersand) and \\1 \\2 \\3 to refer to matched text. See examples below." >
             <sanitizer>
                 <valid initial="string.printable">
                     <remove value="&apos;"/>
@@ -129,4 +129,5 @@ The select tool searches the data for lines containing or not containing a match
 @REFERENCES@
 ]]>
     </help>
+    <expand macro="citations" />
 </tool>

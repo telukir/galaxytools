@@ -31,12 +31,12 @@
     <inputs>
         <param format="fasta" name="input" type="data" label="Input sequence as FASTA"/>
 
-        <param name="minNR" type="integer" value="3" label="Minimum number of repeats a CRISPER must have"/>
-        <param name="minRL" type="integer" value="19" label="Minimum length of a CRISPER repeated region"/>
-        <param name="maxRL" type="integer" value="38" label="Maximum length of a CRISPER repeated region"/>
-        <param name="minSL" type="integer" value="19" label="Minimum length of CRISPER non repeated region" help="or spacer region"/>
-        <param name="maxSL" type="integer" value="48" label="Maximum length of CRISPER non repeated region" help="or spacer region"/>
-        <param name="searchWL" type="select" label="Length of search window to used to discover CRISPERs">
+        <param name="minNR" type="integer" value="3" label="Minimum number of repeats a CRISPER must have" help="-minNR, default 3"/>
+        <param name="minRL" type="integer" value="19" label="Minimum length of a CRISPER repeated region" help="-minRL, default 19"/>
+        <param name="maxRL" type="integer" value="38" label="Maximum length of a CRISPER repeated region" help="-maxRL, default 38"/>
+        <param name="minSL" type="integer" value="19" label="Minimum length of CRISPER non repeated region" help="or spacer region, -minSL, default 19"/>
+        <param name="maxSL" type="integer" value="48" label="Maximum length of CRISPER non repeated region" help="or spacer region, -maxSL, default 48"/>
+        <param name="searchWL" type="select" label="Length of search window to used to discover CRISPERs" help="-searchWL">
             <option value="none" selected="true">default</option>
             <option value="6">6</option>
             <option value="7">7</option>
@@ -63,16 +63,19 @@
     </tests>
     <help>
 <![CDATA[
-CRISPR Recognition Tool - a tool for automatic detection of clustered regularly interspaced palindromic repeats
 
-http://www.room220.com/crt/
+**What it does**
 
-**Citation**
+`CRISPR Recognition Tool <http://www.room220.com/crt/>`_ is a tool for automatic detection of clustered regularly interspaced palindromic repeats (CRISPR). It rapidly and accurately identifies CRISPRs in large DNA strings, such as genomes and metagenomes. 
 
-For the underlying tool, please cite `Bland C, Ramsey TL, Sabree F, Lowe M, Brown K, Kyrpides NC, Hugenholtz P:
-CRISPR Recognition Tool (CRT): a tool for automatic detection of clustered regularly interspaced palindromic repeats. BMC Bioinformatics. 2007 Jun 18;8(1):209`
+**Input**
+
+DNA sequence in FASTA format
 
 ]]>
     </help>
+    <citations>
+        <citation type="doi">10.1186/1471-2105-8-209</citation>
+    </citations>
 </tool>
 
